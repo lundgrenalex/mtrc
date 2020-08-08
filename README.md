@@ -71,7 +71,7 @@ curl http://appdomain/metrics
 supermetric_total{label1="232",label2="dsds"} 34324.0
 ```
 
-## Features for the future
+## Roadmap
 * aggregation metrics support
 * production-ready Environment
 * gunicorn support
