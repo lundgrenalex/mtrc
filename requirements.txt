@@ -1,0 +1,13 @@
+pip>=10
+werkzeug==0.16.0
+flask
+redis
+gunicorn>=19
+gevent==1.4.0
+requests
+flake8
+sentry-sdk[flask]==0.10.2
+nose2
+coverage
+jsonschema
+prometheus_client

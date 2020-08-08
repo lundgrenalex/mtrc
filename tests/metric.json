@@ -1,0 +1,10 @@
+{
+    "name": "supermetric",
+    "value": 34324,
+    "labels": {
+        "label1": "232",
+        "label2": "dsds"
+    },
+    "date": 1234567891,
+    "description": "Test Metric"
+}
