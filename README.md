@@ -81,3 +81,5 @@ supermetric_total{label1="232",label2="dsds"} 34324.0
 * Logstash support
 * in-memory driver for high load installation
 * charts for k8s
+* basic security
+* nginx config for reverse proxy
