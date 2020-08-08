@@ -83,3 +83,5 @@ supermetric_total{label1="232",label2="dsds"} 34324.0
 * charts for k8s
 * basic security
 * nginx config for reverse proxy
+* udp support
+* vault support
