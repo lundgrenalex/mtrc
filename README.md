@@ -1,6 +1,6 @@
-# MTRC is metric exporter for your applications
+# MTRC is a metric exporter for your applications
 
-This exporter read incoming metrics in JSON format and push them to local database.
+This exporter read incoming metrics in JSON format and push them to the local database.
 
 **Now available only two ways:**
 * Counter (total) this metric make increment every execution by your value
@@ -73,11 +73,11 @@ supermetric_total{label1="232",label2="dsds"} 34324.0
 
 ## Features for the future
 * aggregation metrics support
-* production ready Environment
+* production-ready Environment
 * gunicorn support
 * full test coverage
 * logging
 * Sentry support
 * Logstash support
-* inmemory driver for highload instaltion
+* in-memory driver for high load installation
 * charts for k8s
