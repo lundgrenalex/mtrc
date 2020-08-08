@@ -14,7 +14,7 @@ make install_requirements;
 python3 application.py;
 ```
 
-## How to store on python:
+## How to store in python:
 ```python
 import json
 import requests
