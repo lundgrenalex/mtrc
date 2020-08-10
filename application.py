@@ -10,6 +10,7 @@ import config
 logging.basicConfig(
     format='%(asctime)-15s %(levelname)-8s %(name)-1s: %(message)s',
     level=logging.DEBUG,
+    filename='./logs/mrtc.log',
 )
 
 # New start - clear DB

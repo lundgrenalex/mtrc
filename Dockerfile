@@ -24,4 +24,5 @@ ENTRYPOINT [
     "--timeout 60",
     "--log-level=info",
     "--pid ./run/events_handler.pid",
+    "--log-file=./logs/mrtc.log",
 ]

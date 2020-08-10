@@ -12,12 +12,22 @@ flask = {
     'debug': True,
 }
 
+mrtc = {
+    'exporter': {
+        'basic_auth_security': {
+            'enabled': False,
+            'login': '',
+            'password': '',
+        },
+    }
+}
+
 prometheus = {
     'db_pathname': './tmp',
     'remove_database': True,
 }
 
-# Overwrite config by your local 
+# Overwrite config by your local
 try:
     from configs.local import *  # noqa
 except ImportError:

@@ -16,14 +16,15 @@ create_venv:
 
 start_without_docker:
 	$(VIRTUALENV_NAME)/bin/gunicorn application:app \
-	--bind 0.0.0.0:8087 \
+	--bind 127.0.0.1:8087 \
 	--workers 1 \
 	--worker-class gevent \
 	--worker-connections=3000 \
 	--backlog=1000 \
 	--timeout 60 \
 	--log-level=info \
-	--pid ./run/mtrc.pid;
+	--pid ./run/mtrc.pid \
+	--log-file=./logs/mrtc.log;
 
 
 update: git pull

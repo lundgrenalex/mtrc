@@ -1,2 +1,3 @@
 * nginx config for reverse proxy
 * gunicorn support
+* logging
