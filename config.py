@@ -1,5 +1,6 @@
 import logging
 import logging.config
+from werkzeug.security import generate_password_hash
 import os
 
 
@@ -15,9 +16,10 @@ flask = {
 mrtc = {
     'exporter': {
         'basic_auth_security': {
-            'enabled': False,
-            'login': '',
-            'password': '',
+            'disabled': True,
+            'users': {
+                'user1': generate_password_hash(''),
+            }
         },
     }
 }
