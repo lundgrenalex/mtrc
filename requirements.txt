@@ -1,6 +1,7 @@
 pip>=10
 werkzeug==0.16.0
 flask
+flask_httpauth==4.1.0
 redis
 gunicorn>=19
 gevent==1.4.0

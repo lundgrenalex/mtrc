@@ -1,0 +1,29 @@
+[Unit]
+Description=MRTC Metric Collector
+After=network.target
+
+[Service]
+Environment=GUNICORN_TIMEOUT=30 APP_DIR=/opt/mrtc/
+PIDFile=/run/gunicorn-app/pid
+User=mrtc
+Group=mrtc
+RuntimeDirectory=gunicorn-app
+WorkingDirectory=/opt/mrtc/
+ExecStart=/opt/mrtc/.env/bin/gunicorn application:app \
+        --bind 127.0.0.1:8081 \
+        --workers 8 \
+        --worker-class gevent \
+        --worker-connections=3000 \
+        --backlog=1000 \
+        --timeout ${GUNICORN_TIMEOUT} \
+        --access-logfile=${APP_DIR}logs/access.log \
+        --error-logfile=${APP_DIR}logs/error.log \
+        --log-level=error \
+        --pid /run/mrtc/pid
+
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

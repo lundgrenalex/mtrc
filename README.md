@@ -70,16 +70,3 @@ curl http://appdomain/metrics
 # TYPE supermetric_total counter
 supermetric_total{label1="232",label2="dsds"} 34324.0
 ```
-
-## Features for the future
-* aggregation metrics support
-* production-ready Environment
-* gunicorn support
-* full test coverage
-* logging
-* Sentry support
-* Logstash support
-* in-memory driver for high load installation
-* charts for k8s
-* basic security
-* nginx config for reverse proxy
