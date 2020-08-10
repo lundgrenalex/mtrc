@@ -13,3 +13,15 @@ RUN pip3 install -r requirements.txt
 RUN chmod +x run.sh
 
 ENTRYPOINT ["python3", "appication.py"]
+ENTRYPOINT [
+    "gunicorn",
+    "application:app",
+    "--bind 0.0.0.0:8087",
+    "--workers 1",
+    "--worker-class gevent",
+    "--worker-connections=1000",
+    "--backlog=1000",
+    "--timeout 60",
+    "--log-level=info",
+    "--pid ./run/events_handler.pid",
+]
