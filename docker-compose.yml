@@ -6,6 +6,10 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    depends_on:
+      - mongodb
     ports:
       - "8087:8087"
     tty: true
+  mongodb:
+    image: "mongodb:latest"
