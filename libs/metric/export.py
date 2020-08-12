@@ -1,11 +1,12 @@
 from libs.storage import mongo
 
 '''
-FORMAT
+FORMAT: https://prometheus.io/docs/instrumenting/exposition_formats/#basic-info
 metric_name [
   "{" label_name "=" `"` label_value `"` { "," label_name "=" `"` label_value `"` } [ "," ] "}"
 ] value [ timestamp ]
 '''
+
 
 def get_labels_string(labels: dict) -> str:
     '''making prometheus format for labels'''
@@ -14,6 +15,7 @@ def get_labels_string(labels: dict) -> str:
         result += f'{key}="{value}", '
     result = '{' + result + '}'
     return result.replace(', }', '}')
+
 
 def get_metrics() -> str:
     '''get metrics for prometheus'''
