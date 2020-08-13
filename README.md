@@ -27,43 +27,13 @@ flask = {
     'debug': True,
     'sentry_dsn': None,
 }
-
-mrtc = {
-    'exporter': {
-        'basic_auth_security': {
-            'disabled': True,
-            'users': {
-                'user1': generate_password_hash(''),
-            }
-        },
-    }
-}
 ```
 
-## How to store (httpie):
-```bash
-http POST http://localhost:8087/handler/counter < tests/metric.json
-HTTP/1.0 200 OK
-Content-Length: 188
-Content-Type: application/json
-Date: Thu, 13 Aug 2020 04:27:33 GMT
-Server: Werkzeug/0.16.0 Python/3.8.2
+## HOWTO store your data
+* [Python Examples](https://github.com/lundgrenalex/mtrc/wiki/Metrics-primitives-in-MRTC)
 
-{
-    "date": 1234567891,
-    "description": "Test Metric",
-    "labels": {
-        "label1": "232",
-        "label2": "dsds"
-    },
-    "name": "supermetric",
-    "type": "counter",
-    "value": 283.5
-}
-```
 
-## How to handle metric by your Prometheus from this app:
-### Httpie example
+## HOWTO handle your metrics from Prometheus:
 ```bash
 http http://127.0.0.1:8087/metrics/                                
 HTTP/1.0 200 OK
