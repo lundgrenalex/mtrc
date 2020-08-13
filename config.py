@@ -25,11 +25,6 @@ mrtc = {
     }
 }
 
-prometheus = {
-    'db_pathname': './tmp',
-    'remove_database': True,
-}
-
 # Overwrite config by your local
 try:
     from configs.local import *  # noqa

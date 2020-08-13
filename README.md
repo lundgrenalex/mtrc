@@ -34,11 +34,18 @@ flask = {
     'host': '127.0.0.1',
     'port': '8087',
     'debug': True,
+    'sentry_dsn': None,
 }
 
-prometheus = {
-    'db_pathname': './tmp',
-    'remove_database': True,
+mrtc = {
+    'exporter': {
+        'basic_auth_security': {
+            'disabled': True,
+            'users': {
+                'user1': generate_password_hash(''),
+            }
+        },
+    }
 }
 ```
 
