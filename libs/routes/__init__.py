@@ -3,9 +3,11 @@ from libs.tools.encoders import FlaskEncoder
 import sentry_sdk
 import config
 from sentry_sdk.integrations.flask import FlaskIntegration
-
+# incoming primitives
 from .counter import app as counter_app
 from .gauge import app as gauge_app
+from .average import app as average_app
+# exporter
 from .exporter import app as exporter_app
 
 
@@ -29,6 +31,7 @@ def create_app():
     app = Flask(__name__)
     app.register_blueprint(counter_app)
     app.register_blueprint(gauge_app)
+    app.register_blueprint(average_app)
     app.register_blueprint(exporter_app)
     app.register_error_handler(404, not_found)
     app.register_error_handler(500, server_error)

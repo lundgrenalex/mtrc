@@ -1,0 +1,11 @@
+{
+    "name": "supermetric",
+    "value": 447.25,
+    "average": 30,
+    "labels": {
+        "label1": "232",
+        "label2": "dsds"
+    },
+    "date": 1234567891,
+    "description": "Test Metric"
+}

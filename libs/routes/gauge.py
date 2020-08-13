@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from libs.tools.json import validate_schema
 from libs.metric import counter, gauge
 
-app = Blueprint('gateway', __name__, url_prefix='/handler/gauge')
+app = Blueprint('gateway-gauge', __name__, url_prefix='/handler/gauge')
 
 
 @app.route('/', methods=['POST'])
