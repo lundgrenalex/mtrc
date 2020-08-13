@@ -49,7 +49,7 @@ mrtc = {
 }
 ```
 
-## How to store in python:
+## How to store (httpie):
 ```bash
 http POST http://localhost:8087/handler/counter < tests/metric.json
 HTTP/1.0 200 OK
@@ -72,6 +72,7 @@ Server: Werkzeug/0.16.0 Python/3.8.2
 ```
 
 ## How to handle metric by your Prometheus from this app:
+### Httpie example
 ```bash
 http http://127.0.0.1:8087/metrics/                                
 HTTP/1.0 200 OK
