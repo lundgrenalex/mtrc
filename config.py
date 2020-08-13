@@ -14,17 +14,6 @@ flask = {
     'sentry_dsn': None,
 }
 
-mrtc = {
-    'exporter': {
-        'basic_auth_security': {
-            'disabled': True,
-            'users': {
-                'user1': generate_password_hash(''),
-            }
-        },
-    }
-}
-
 # Overwrite config by your local
 try:
     from configs.local import *  # noqa
