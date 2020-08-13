@@ -7,9 +7,9 @@ services:
       context: .
       dockerfile: ./Dockerfile
     depends_on:
-      - mongodb
+      - redis
     ports:
       - "8087:8087"
     tty: true
   mongodb:
-    image: "mongodb:latest"
+    image: "redis:latest"

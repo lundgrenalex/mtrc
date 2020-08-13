@@ -1,19 +1,10 @@
-from libs.storage import mongo
+from libs.storage import redis
+import json
 
 
-def update(metric: dict):
-    # https://github.com/prometheus/client_python#counter
-    # calc counter metric
-    db = mongo.connect()
-    result = db.mrtc.metrics.update_one({
-        'name': metric['name'],  # must be indexed
-        'type': 'gauge',         # must be indexed
-    }, {
-        '$set': {
-            'labels': metric['labels'],
-            'date': metric['date'],
-            'description': metric['description'],
-            'value': metric['value'],
-        },
-    }, upsert=True)
-    print(result)
+def update(metric: dict) -> dict:
+    r = redis.connect()
+    metric['type'] = 'gauge'
+    metric_name = f"{metric['name']}"
+    r.set(metric_name, json.dumps(metric))
+    return json.loads(r.get(metric_name))

@@ -1,4 +1,5 @@
-from libs.storage import mongo
+from libs.storage import redis
+import json
 
 '''
 FORMAT: https://prometheus.io/docs/instrumenting/exposition_formats/#basic-info
@@ -19,10 +20,13 @@ def get_labels_string(labels: dict) -> str:
 
 def get_metrics() -> str:
     '''get metrics for prometheus'''
-    db = mongo.connect()
+    r = redis.connect()
     result = ''
-    metrics = [metric for metric in db.mrtc.metrics.find({}, {'_id': False})]
-    for metric in metrics:
-        metric_string = f"{metric['name']}{get_labels_string(metric['labels'])} {metric['value']}\n"
+    for metric_name in r.keys("*"):
+        metric = json.loads(r.get(metric_name))
+        metric_string = f"{metric_name}{get_labels_string(metric['labels'])} {metric['value']}\n"
+        if metric['description']:
+            result += f"# HELP {metric_name} {metric['description']}\n"
+        result += f"# TYPE {metric_name} {metric['type']}\n"
         result += metric_string
     return result
