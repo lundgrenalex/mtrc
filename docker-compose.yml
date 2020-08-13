@@ -1,6 +1,7 @@
 version: '3'
 services:
   mtrc:
+    restart: always
     environment:
       APP: mtrc
     build:
@@ -11,5 +12,6 @@ services:
     ports:
       - "8087:8087"
     tty: true
-  mongodb:
+  redis:
+    restart: always
     image: "redis:latest"

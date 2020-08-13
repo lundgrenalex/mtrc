@@ -10,20 +10,8 @@ This exporter read incoming metrics in JSON format and push them to the local da
 
 ## How to run this exporter:
 ```bash
-make create_venv;
-make install_requirements;
-. ./setenv.sh;
-python3 application.py;
-
-* Serving Flask app "libs.routes" (lazy loading)
-* Environment: production
-  WARNING: This is a development server. Do not use it in a production deployment.
-  Use a production WSGI server instead.
-* Debug mode: on
-2020-08-08 08:35:52,849 INFO     werkzeug:  * Running on http://127.0.0.1:8087/ (Press CTRL+C to quit)
-2020-08-08 08:35:52,850 INFO     werkzeug:  * Restarting with stat
-2020-08-08 08:35:53,093 WARNING  werkzeug:  * Debugger is active!
-2020-08-08 08:35:53,094 INFO     werkzeug:  * Debugger PIN: 130-633-358
+docker-copmose build;
+docker-compose up -d;
 ```
 
 ## Configs
