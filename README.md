@@ -43,30 +43,40 @@ prometheus = {
 ```
 
 ## How to store in python:
-```python
-import json
-import requests
+```bash
+http POST http://localhost:8087/handler/counter < tests/metric.json
+HTTP/1.0 200 OK
+Content-Length: 188
+Content-Type: application/json
+Date: Thu, 13 Aug 2020 04:27:33 GMT
+Server: Werkzeug/0.16.0 Python/3.8.2
 
-metric = {
-    "name": "example",
-    "labels":{
-        "method": "post",
-        "endpoint": "/api/cats/",
-        "http_code": "200"
+{
+    "date": 1234567891,
+    "description": "Test Metric",
+    "labels": {
+        "label1": "232",
+        "label2": "dsds"
     },
-    "value": 1,
-    "date": 1234567891,  # unix timestamp
-    "description": "Your discription!",
+    "name": "supermetric",
+    "type": "counter",
+    "value": 283.5
 }
-
-response = requests.post('http://appdomain/handler/counter', data=json.dumps(metric))
 ```
 
 ## How to handle metric by your Prometheus from this app:
-``` bash
-curl http://appdomain/metrics
+```bash
+http http://127.0.0.1:8087/metrics/                                
+HTTP/1.0 200 OK
+Content-Length: 226
+Content-Type: text
+Date: Thu, 13 Aug 2020 04:29:09 GMT
+Server: Werkzeug/0.16.0 Python/3.8.2
 
-# HELP supermetric_total Multiprocess metric
+# HELP supermetric Test Metric
+# TYPE supermetric gauge
+supermetric{label1="232", label2="dsds"} 47.25
+# HELP supermetric_total Test Metric
 # TYPE supermetric_total counter
-supermetric_total{label1="232",label2="dsds"} 34324.0
+supermetric_total{label1="232", label2="dsds"} 283.5
 ```

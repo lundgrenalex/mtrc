@@ -1,14 +1,15 @@
-from prometheus_client import (Counter, CollectorRegistry,)
+from libs.storage import redis
+import json
 
 
-def update(metric_data: dict) -> bool:
-    # https://github.com/prometheus/client_python#counter
-    # calc counter metric
-    registry = CollectorRegistry()
-    labels_list = metric_data['labels'].keys()
-    metric = Counter(
-        metric_data['name'],
-        metric_data['description'],
-        labels_list,
-        registry=registry)
-    return metric.labels(**metric_data['labels']).inc(metric_data['value'])
+def update(metric: dict) -> dict:
+    r = redis.connect()
+    metric['type'] = 'counter'
+    metric_name = f"{metric['name']}_total"
+    stored_metric = r.get(metric_name)
+    if not stored_metric:
+        r.set(metric_name, json.dumps(metric))
+    else:
+        metric['value'] += json.loads(stored_metric)['value']
+        r.set(metric_name, json.dumps(metric))
+    return json.loads(r.get(metric_name))

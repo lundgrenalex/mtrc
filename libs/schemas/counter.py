@@ -5,7 +5,10 @@ schema = {
     "properties": {
         "name": {"type": "string"},
         "date": {"type": "integer"},
-        "value": {"type": "number"},
+        "value": {
+            "type": "number",
+            "minimum": 0,
+        },
         "labels": {
             "type": "object",
             "minProperties": 1,

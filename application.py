@@ -1,8 +1,5 @@
-import os
-import glob
 import logging
 from werkzeug.middleware.proxy_fix import ProxyFix
-import prometheus_client
 from libs.routes import create_app
 import config
 
@@ -12,12 +9,6 @@ logging.basicConfig(
     level=logging.DEBUG,
     filename='./logs/mrtc.log',
 )
-
-# New start - clear DB
-if config.prometheus['remove_database']:
-    db_files = glob.glob('./tmp/*.db', recursive=True)
-    for db_file in db_files:
-        os.remove(db_file)
 
 
 app = create_app()
