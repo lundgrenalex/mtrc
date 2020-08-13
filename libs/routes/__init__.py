@@ -4,9 +4,9 @@ import sentry_sdk
 import config
 from sentry_sdk.integrations.flask import FlaskIntegration
 
-from .gateway import app as gateway_app
+from .counter import app as counter_app
+from .gauge import app as gauge_app
 from .exporter import app as exporter_app
-
 
 
 def not_found(e):
@@ -27,7 +27,8 @@ def create_app():
     sentry_sdk.init(
         dsn=config.flask['sentry_dsn'], integrations=[FlaskIntegration()])
     app = Flask(__name__)
-    app.register_blueprint(gateway_app)
+    app.register_blueprint(counter_app)
+    app.register_blueprint(gauge_app)
     app.register_blueprint(exporter_app)
     app.register_error_handler(404, not_found)
     app.register_error_handler(500, server_error)
