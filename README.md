@@ -35,19 +35,20 @@ flask = {
 ## HOWTO store your data
 
 -   [Python Examples](https://github.com/lundgrenalex/mtrc/wiki/Metrics-primitives-in-MRTC)
+    [example](/docs/httpie/counter.md)
 
 ## Methods
 
-| method | pathname                        | description           |
-| ------ | ------------------------------- | --------------------- |
-| POST   | /handler/counter/               | update counter metric |
-| DELETE | /handler/counter/{metric_name}/ | delete counter metric |
-| POST   | /handler/gauge/                 | update gauge metric   |
-| DELETE | /handler/gauge/{metric_name}/   | delete gauge metric   |
-| POST   | /handler/average/               | update average metric |
-| DELETE | /handler/average/{metric_name}/ | delete average metric |
-| GET    | /metrics/                       | get all metrics       |
-| DELETE | /metrics/                       | delete all metrics    |
+| method | pathname                        | description           | Examples                            |
+| ------ | ------------------------------- | --------------------- | ----------------------------------- |
+| POST   | /handler/counter/               | update counter metric | [example](/docs/httpie/counter.md)  |
+| DELETE | /handler/counter/{metric_name}/ | delete counter metric | [example](/docs/httpie/counter.md)  |
+| POST   | /handler/gauge/                 | update gauge metric   | [example](/docs/httpie/gauge.md)    |
+| DELETE | /handler/gauge/{metric_name}/   | delete gauge metric   | [example](/docs/httpie/gauge.md)    |
+| POST   | /handler/average/               | update average metric | [example](/docs/httpie/average.md)  |
+| DELETE | /handler/average/{metric_name}/ | delete average metric | [example](/docs/httpie/average.md)  |
+| GET    | /metrics/                       | get all metrics       | [example](/docs/httpie/exporter.md) |
+| DELETE | /metrics/                       | delete all metrics    | [example](/docs/httpie/exporter.md) |
 
 ## HOWTO handle your metrics from Prometheus:
 
