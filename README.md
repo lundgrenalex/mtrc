@@ -36,7 +36,7 @@ flask = {
 
 -   [Python Examples](https://github.com/lundgrenalex/mtrc/wiki/Metrics-primitives-in-MRTC)
 
-## Methods map
+## Methods
 
 | method | pathname                        | description           |
 | ------ | ------------------------------- | --------------------- |
