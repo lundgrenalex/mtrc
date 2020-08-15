@@ -19,51 +19,15 @@ docker-copmose build;
 docker-compose up -d;
 ```
 
-## Configs
+## API methods
 
-```python
-# config.py
-
-flask = {
-    'host': '127.0.0.1',
-    'port': '8087',
-    'debug': True,
-    'sentry_dsn': None,
-}
-```
-
-## HOWTO store your data
-
--   [Python Examples](https://github.com/lundgrenalex/mtrc/wiki/Metrics-primitives-in-MRTC)
-    [example](/docs/httpie/counter.md)
-
-## Methods
-
-| method | pathname                        | description           | Examples                            |
-| ------ | ------------------------------- | --------------------- | ----------------------------------- |
-| POST   | /handler/counter/               | update counter metric | [example](/docs/httpie/counter.md)  |
-| DELETE | /handler/counter/{metric_name}/ | delete counter metric | [example](/docs/httpie/counter.md)  |
-| POST   | /handler/gauge/                 | update gauge metric   | [example](/docs/httpie/gauge.md)    |
-| DELETE | /handler/gauge/{metric_name}/   | delete gauge metric   | [example](/docs/httpie/gauge.md)    |
-| POST   | /handler/average/               | update average metric | [example](/docs/httpie/average.md)  |
-| DELETE | /handler/average/{metric_name}/ | delete average metric | [example](/docs/httpie/average.md)  |
-| GET    | /metrics/                       | get all metrics       | [example](/docs/httpie/exporter.md) |
-| DELETE | /metrics/                       | delete all metrics    | [example](/docs/httpie/exporter.md) |
-
-## HOWTO handle your metrics from Prometheus:
-
-```bash
-http http://127.0.0.1:8087/metrics/                                
-HTTP/1.0 200 OK
-Content-Length: 226
-Content-Type: text
-Date: Thu, 13 Aug 2020 04:29:09 GMT
-Server: Werkzeug/0.16.0 Python/3.8.2
-
-# HELP supermetric Test Metric
-# TYPE supermetric gauge
-supermetric{label1="232", label2="dsds"} 47.25
-# HELP supermetric_total Test Metric
-# TYPE supermetric_total counter
-supermetric_total{label1="232", label2="dsds"} 283.5
-```
+| method | pathname                        | description       | Httpie Examples                            |
+| ------ | ------------------------------- | ----------------- | ----------------------------------- |
+| POST   | /handler/counter/               | update counter    | [read](/docs/httpie/counter.md)  |
+| DELETE | /handler/counter/{metric_name}/ | delete counter    | [read](/docs/httpie/counter.md)  |
+| POST   | /handler/gauge/                 | update gauge      | [read](/docs/httpie/gauge.md)    |
+| DELETE | /handler/gauge/{metric_name}/   | delete gauge      | [read](/docs/httpie/gauge.md)    |
+| POST   | /handler/average/               | update average    | [read](/docs/httpie/average.md)  |
+| DELETE | /handler/average/{metric_name}/ | delete average    | [read](/docs/httpie/average.md)  |
+| GET    | /metrics/                       | get all metrics   | [read](/docs/httpie/exporter.md) |
+| DELETE | /metrics/                       | flush all metrics | [read](/docs/httpie/exporter.md) |
