@@ -30,3 +30,10 @@ def get_metrics() -> str:
         result += f"# TYPE {metric_name} {metric['type']}\n"
         result += metric_string
     return result
+
+
+def drop_all_metrics() -> bool:
+    '''drop all metrics'''
+    import redis
+    r = redis.Redis()
+    return r.flushall()

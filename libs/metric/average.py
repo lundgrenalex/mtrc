@@ -19,3 +19,10 @@ def push_and_count(metric_name: str, value: float, average: int) -> float:
     r.lpush(metric_name, value)
     elements = [float(item) for item in (r.lrange(metric_name, 0, -1))]
     return sum(elements)/len(elements)
+
+
+def remove(metric_name: str) -> bool:
+    r = redis.connect()
+    r.delete(metric_name)
+    r = redis.connect(db=1)
+    return r.delete(metric_name)

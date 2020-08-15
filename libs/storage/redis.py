@@ -10,5 +10,5 @@ def connect(**redis_settings):
     conn_key = ';'.join(['{}:{}'.format(k, str(v)) for k, v in redis_settings.items()])
     if conn_key not in connections_pool:
         redis_settings = redis_settings.copy()
-        connections_pool[conn_key] = redis.StrictRedis(**redis_settings, charset="utf-8", decode_responses=True)
+        connections_pool[conn_key] = redis.StrictRedis(**redis_settings, encoding="utf-8", decode_responses=True)
     return connections_pool[conn_key]

@@ -13,3 +13,8 @@ def update(metric: dict) -> dict:
         metric['value'] += json.loads(stored_metric)['value']
         r.set(metric_name, json.dumps(metric))
     return json.loads(r.get(metric_name))
+
+
+def remove(metric_name: str) -> bool:
+    r = redis.connect()
+    return r.delete(metric_name)

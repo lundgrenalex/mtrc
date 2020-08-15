@@ -10,3 +10,9 @@ app = Blueprint('gateway-average', __name__, url_prefix='/handler/average')
 def get_average():
     result = average.update(request.json)
     return jsonify(result), 200
+
+
+@app.route('/<string:metric_name>/', methods=['DELETE'])
+def remove_metric(metric_name):
+    result = average.remove(metric_name)
+    return jsonify(result), 200
