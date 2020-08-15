@@ -46,8 +46,8 @@ flask = {
 | DELETE | /handler/gauge/{metric_name}/   | delete gauge metric   |
 | POST   | /handler/average/               | update average metric |
 | DELETE | /handler/average/{metric_name}/ | delete average metric |
-| GET    | /metrics/                       | delete counter metric |
-| DELETE | /metrics/                       | delete counter metric |
+| GET    | /metrics/                       | get all metrics       |
+| DELETE | /metrics/                       | delete all metrics    |
 
 ## HOWTO handle your metrics from Prometheus:
 
