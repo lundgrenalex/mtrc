@@ -21,8 +21,8 @@ docker-compose up -d;
 
 ## API methods
 
-| method | pathname                        | description       | Httpie Examples                            |
-| ------ | ------------------------------- | ----------------- | ----------------------------------- |
+| method | pathname                        | description       | httpie examples                  |
+| ------ | ------------------------------- | ----------------- | -------------------------------- |
 | POST   | /handler/counter/               | update counter    | [read](/docs/httpie/counter.md)  |
 | DELETE | /handler/counter/{metric_name}/ | delete counter    | [read](/docs/httpie/counter.md)  |
 | POST   | /handler/gauge/                 | update gauge      | [read](/docs/httpie/gauge.md)    |
