@@ -15,14 +15,14 @@ POST `/handler/average/`
 
 #### Metric fieldset format for request
 
-| filed name  | type                    | example         |
-| ----------- | ----------------------- | --------------- |
-| name        | string `^/(a-z_)/*`     | my_metric       |
-| value       | number                  | 12210912        |
-| average     | enum[30,60,120,180,300] | 60              |
-| description | text                    | My first metric |
-| date        | timestamp               | 1597462667      |
-| labels      | object                  | object          |
+| filed name  | required | type                    | example         |
+| ----------- | -------- | ----------------------- | --------------- |
+| name        | yes      | string `^/(a-z_)/*`     | my_metric       |
+| value       | yes      | number                  | 12210912        |
+| average     | yes      | enum[30,60,120,180,300] | 60              |
+| description | no       | text                    | My first metric |
+| date        | yes      | timestamp               | 1597462667      |
+| labels      | no       | object                  | object          |
 
 #### Labels format
 
@@ -33,7 +33,9 @@ POST `/handler/average/`
 ```
 
 ## httpie examples
+
 ### Requet
+
 ```bash
 http POST http://localhost:8087/handler/average/ \
     name='supermetric' \
@@ -45,6 +47,7 @@ http POST http://localhost:8087/handler/average/ \
 ```
 
 ### Response
+
 ```bash
 HTTP/1.0 200 OK
 Content-Length: 196
@@ -52,6 +55,7 @@ Content-Type: application/json
 Date: Wed, 19 Aug 2020 05:24:28 GMT
 Server: Werkzeug/0.16.0 Python/3.8.2
 ```
+
 ```json
 {
     "average": 30,
@@ -67,6 +71,7 @@ Server: Werkzeug/0.16.0 Python/3.8.2
 ```
 
 ### Exporter page
+
 ```bash
 http GET http://127.0.0.1:8087/metrics/
 HTTP/1.0 200 OK
