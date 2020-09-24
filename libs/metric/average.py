@@ -1,28 +1,67 @@
-from libs.storage import redis
-from redis import exceptions as redis_exceptions
+from libs.storage import mongodb
 import json
+import time
 
 
-def update(metric: dict) -> dict:
-    r = redis.connect()
-    metric['type'] = 'average'
-    metric_name = f"{metric['name']}_avg_{metric['average']}"
-    metric['value'] = push_and_count(
-        metric_name, metric['value'], metric['average'])
-    r.set(metric_name, json.dumps(metric))
-    return json.loads(r.get(metric_name))
+def update(metric: dict) -> bool:
 
+    db = mongodb.connect()
+    current_time = int(time.time())
 
-def push_and_count(metric_name: str, value: float, average: int) -> float:
-    r = redis.connect(db=1)
-    r.expire(metric_name, average)
-    r.lpush(metric_name, value)
-    elements = [float(item) for item in (r.lrange(metric_name, 0, -1))]
-    return sum(elements)/len(elements)
+    saved_metric = db.mtrc.metrics.find_one({
+        'type': 'average',
+        'name': metric['name'],
+        'labels': metric['labels'],
+        'average': metric['average'],
+    })
+
+    if not saved_metric:
+        db.mtrc.metrics.insert_one({
+            'type': 'average',
+            'name': metric['name'],
+            'labels': metric['labels'],
+            'average': int(metric['average']),
+            'description': metric['description'],
+            'values': [{
+                'date': int(metric['date']),
+                'value': float(metric['value']),
+            }],
+            'value': float(metric['value']),
+            'date': current_time,
+        })
+        return True
+
+    # update range
+    saved_metric['values'].append({
+        'value': metric['value'],
+        'date': metric['date'],
+    })
+
+    # remove old
+    # filter range by average timeshist
+    new_values = []
+    for i in range(len(saved_metric['values'])):
+        if saved_metric['values'][i]['date'] + saved_metric['average'] > current_time:
+            new_values.append(saved_metric['values'][i])
+    saved_metric['values'] = new_values
+
+    # count average value and actual range
+    saved_metric['value'] = sum([
+        v['value'] for v in saved_metric['values']
+    ]) / len(saved_metric['values'])
+
+    # touch date
+    saved_metric['date'] = current_time
+
+    # store new data
+    db.mtrc.metrics.update_one({'_id': saved_metric['_id']}, {
+        '$set': saved_metric
+    })
+
+    return True
 
 
 def remove(metric_name: str) -> bool:
-    r = redis.connect()
-    r.delete(metric_name)
-    r = redis.connect(db=1)
-    return r.delete(metric_name)
+    db = mongodb.connect()
+    db.mtrc.metrics.remove({'type': 'average', 'name': metric['name']})
+    return True

@@ -32,7 +32,7 @@ POST `/handler/average/`
 },
 ```
 
-## httpie examples
+## httpie examples (UPDATE METRIC)
 
 ### Requet
 

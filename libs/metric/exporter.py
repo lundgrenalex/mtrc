@@ -1,4 +1,4 @@
-from libs.storage import redis
+from libs.storage import mongodb
 import json
 
 '''
@@ -20,20 +20,17 @@ def get_labels_string(labels: dict) -> str:
 
 def get_metrics() -> str:
     '''get metrics for prometheus'''
-    r = redis.connect()
+    db = mongodb.connect()
     result = ''
-    for metric_name in r.keys("*"):
-        metric = json.loads(r.get(metric_name))
-        metric_string = f"{metric_name}{get_labels_string(metric['labels'])} {metric['value']}\n"
-        if metric['description']:
-            result += f"# HELP {metric_name} {metric['description']}\n"
-        result += f"# TYPE {metric_name} {metric['type']}\n"
-        result += metric_string
+    metrics = [metric for metric in db.mtrc.metrics.find()]
+    for metric in metrics:
+        result += f"# HELP {metric['name']} {metric['description']}\n"
+        result += f"# TYPE {metric['name']} {metric['type']}\n"
+        result += f"{metric['name']}_{metric['type']}{get_labels_string(metric['labels'])} {metric['value']}\n"
     return result
 
 
 def drop_all_metrics() -> bool:
     '''drop all metrics'''
-    import redis
-    r = redis.Redis()
-    return r.flushall()
+    db = mongodb.connect()
+    return db.drop_database('mtrc')
