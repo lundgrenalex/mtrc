@@ -1,6 +1,6 @@
 pip>=10
 flask
-redis
+pymongo
 gunicorn
 gevent
 requests
