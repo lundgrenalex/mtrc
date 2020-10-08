@@ -1,11 +1,11 @@
 pip>=10
-werkzeug==0.16.0
-flask>=1.1.2
+flask
 redis
-gunicorn>=19.9.0
+gunicorn
+gevent
 requests
 flake8
-sentry-sdk[flask]==0.10.2
+sentry-sdk[flask]
 nose2
 coverage
 jsonschema
