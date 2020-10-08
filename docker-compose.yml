@@ -12,6 +12,6 @@ services:
     ports:
       - "8087:8087"
     tty: true
-  redis:
+  mongodb:
     restart: always
-    image: "mongodb:latest"
+    image: "mongodb:mongo:4.2.10-bionic"
