@@ -4,7 +4,7 @@ flask>=1.1.2
 redis
 gunicorn>=19.9.0
 gevent==1.4.0
-greenlet==0.4.13
+greenlet>=0.4.14
 requests
 flake8
 sentry-sdk[flask]==0.10.2
