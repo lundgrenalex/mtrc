@@ -11,7 +11,6 @@ def update(metric: dict) -> dict:
         'type': 'gauge',
         'name': metric['name'],
         'labels': metric['labels'],
-        'average': metric['average'],
     })
 
     if not saved_metric:
@@ -19,7 +18,6 @@ def update(metric: dict) -> dict:
             'type': 'gauge',
             'name': metric['name'],
             'labels': metric['labels'],
-            'average': int(metric['average']),
             'description': metric['description'],
             'value': float(metric['value']),
             'date': current_time,
