@@ -3,7 +3,10 @@ schema = {
     "title": "MetricItem",
     "type": "object",
     "properties": {
-        "name": {"type": "string"},
+        "name": {
+            "type": "string",
+            "pattern": "^[a-z_][a-z0-9_]*$",
+        },
         "date": {"type": "integer"},
         "value": {
             "type": "number",
