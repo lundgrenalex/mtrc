@@ -15,7 +15,7 @@ def validate_schema(schema_name: str):
                 schema = import_module('libs.schemas.' + schema_name, package=__name__)
                 validate(request.json, schema.schema)
             except ValidationError as e:
-                logging.error(f'ValidationError: {e.message}')
+                logging.error(f'ValidationError: {e.message}, {request.data}')
                 return jsonify({
                     "error_code": 400,
                     "error_type": "ValidationError",
