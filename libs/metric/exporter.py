@@ -24,8 +24,9 @@ def get_metrics() -> str:
     result = ''
     metrics = [metric for metric in db.mtrc.metrics.find()]
     for metric in metrics:
-        result += f"# HELP {metric['name']} {metric['description']}\n"
-        result += f"# TYPE {metric['name']} {metric['type']}\n"
+        if 'description' in metric:
+            result += f"# HELP {metric['name']} {metric['description']}\n"
+            result += f"# TYPE {metric['name']} {metric['type']}\n"
         result += f"{metric['name']}_{metric['type']}{get_labels_string(metric['labels'])} {metric['value']}\n"
     return result
 
