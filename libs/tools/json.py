@@ -4,6 +4,7 @@ from jsonschema import validate
 from jsonschema.exceptions import ValidationError
 from werkzeug.exceptions import BadRequest
 from importlib import import_module
+import logging
 
 
 def validate_schema(schema_name: str):
@@ -14,6 +15,7 @@ def validate_schema(schema_name: str):
                 schema = import_module('libs.schemas.' + schema_name, package=__name__)
                 validate(request.json, schema.schema)
             except ValidationError as e:
+                logging.error(f'ValidationError: {e.message}')
                 return jsonify({
                     "error_code": 400,
                     "error_type": "ValidationError",
