@@ -19,7 +19,7 @@ schema = {
                 "pattern": "^[a-z_][a-z0-9_]*$"
             },
             "additionalProperties": {
-                "type": ["string"]
+                "type": ["string", "null"]
             }
         }
     },
